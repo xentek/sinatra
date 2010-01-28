@@ -5,6 +5,11 @@ require 'rack'
 require 'rack/builder'
 require 'sinatra/showexceptions'
 
+# fail fast if rack version is less than 1.1
+if Rack.release < '1.1'
+  raise LoadError, "Rack must be >= 1.1; you have #{Rack.release}"
+end
+
 # require tilt if available; fall back on bundled version.
 begin
   require 'tilt'
